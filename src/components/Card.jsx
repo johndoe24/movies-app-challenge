@@ -10,10 +10,32 @@ import {
   removeFavorite,
 } from "../features/favorites/FavoriteList";
 
+import Button from "./Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+
 function Card({ details }) {
   const [showModal, setShowModal] = useState(false);
   const favList = useSelector((state) => state.favoriteShows.value);
   const dispatch = useDispatch();
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleAcceptDelete = () => {
+    dispatch(removeFavorite({ id: details.id, name: details.name }));
+    setOpen(false);
+  };
 
   const openModal = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -44,13 +66,7 @@ function Card({ details }) {
         <div className="favorite">
           <div className="card-icons">
             {favList.find((item) => item.id === details.id) ? (
-              <AiFillHeart
-                onClick={() => {
-                  dispatch(
-                    removeFavorite({ id: details.id, name: details.name })
-                  );
-                }}
-              />
+              <AiFillHeart onClick={handleClickOpen} />
             ) : (
               <AiOutlineHeart
                 onClick={() => {
@@ -72,6 +88,30 @@ function Card({ details }) {
             />,
             document.body
           )}
+      </div>
+      <div>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Confirmation Required"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              If you continue this show will be removed from you list of
+              favorite shows. However you can later add it again.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleAcceptDelete} autoFocus>
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     </figure>
   );

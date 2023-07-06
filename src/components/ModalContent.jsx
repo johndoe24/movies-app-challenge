@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import "./ModalContent.css";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   AiFillHeart,
@@ -11,8 +12,30 @@ import {
   removeFavorite,
 } from "../features/favorites/FavoriteList";
 
+import Button from "./Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+
 export default function ModalContent({ onClose, details }) {
   const favList = useSelector((state) => state.favoriteShows.value);
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleAcceptDelete = () => {
+    dispatch(removeFavorite({ id: details.id, name: details.name }));
+    setOpen(false);
+  };
 
   const dispatch = useDispatch();
   return (
@@ -43,11 +66,7 @@ export default function ModalContent({ onClose, details }) {
               <div className="tooltip modal_movie_detail">
                 <AiFillHeart
                   className="icons icons-red"
-                  onClick={() => {
-                    dispatch(
-                      removeFavorite({ id: details.id, name: details.name })
-                    );
-                  }}
+                  onClick={handleClickOpen}
                 />
                 <span className="tooltiptext">click to dislike</span>
               </div>
@@ -89,6 +108,28 @@ export default function ModalContent({ onClose, details }) {
           Close
         </div>
       </figure>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Confirmation Required"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            If you continue this show will be removed from you list of favorite
+            shows. However you can later add it again.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleAcceptDelete} autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

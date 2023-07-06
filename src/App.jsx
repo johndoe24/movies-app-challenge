@@ -4,9 +4,10 @@ import { Formik, Form } from "formik";
 import Input from "./components/Input";
 import Card from "./components/Card";
 import styled from "styled-components";
-import Button from "./components/Button";
 
 import { useSelector } from "react-redux";
+
+import Button from "./components/Button";
 
 const Container = styled.div`
   display: flex;
