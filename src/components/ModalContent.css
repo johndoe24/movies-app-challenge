@@ -1,0 +1,135 @@
+.movie_modal {
+  max-width: 800px;
+  display: flex;
+  overflow: hidden;
+}
+
+.modal_movie_poster {
+  flex: 0 0 45%;
+}
+
+.movie__img {
+  width: 100%;
+  display: block;
+}
+
+.modal_close {
+  background: linear-gradient(to bottom, #a9c9ff 0%, #ffbbec 100%);
+  flex: 0 0 50px;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: rgb(255, 255, 255);
+  writing-mode: vertical-lr;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.modal_movie_content {
+  background-color: #fff;
+  /* flex: 3 0 39%; */
+  padding: 35px 30px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-around;
+}
+.modal_movie_title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  font-size: 35px;
+  margin-right: auto;
+  color: royalblue;
+}
+
+.modal_movie_genres {
+  flex-wrap: wrap;
+}
+
+.modal_movie__tag {
+  font-size: 10px;
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: 100px;
+  margin-right: 8px;
+  display: block;
+  text-transform: uppercase;
+  background-color: #ffbbec;
+}
+
+.modal_movie_description {
+  font-size: 14px;
+}
+
+.modal_movie_details {
+  display: flex;
+  margin: auto;
+}
+
+.modal_movie_detail {
+  font-size: 13px;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.icons {
+  margin-right: 3px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.icons-red {
+  color: salmon;
+}
+.icons-grey {
+  color: grey;
+}
+
+.icons-yellow {
+  color: rgb(190, 190, 71);
+}
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.modal_movie_tag {
+  font-size: 10px;
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: 100px;
+  margin-right: 8px;
+  display: block;
+  text-transform: uppercase;
+  background-color: #a9c9ff;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: 5px;
+}
